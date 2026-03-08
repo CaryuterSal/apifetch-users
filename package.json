@@ -1,0 +1,19 @@
+{
+  "name": "apifetch-users",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@mui/material": "^7.3.9",
+    "react-router-dom": "^7.13.1",
+    "sweetalert2": "^11.26.21"
+  }
+}
