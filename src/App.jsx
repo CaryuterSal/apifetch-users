@@ -26,7 +26,7 @@ function App() {
       <CssBaseline />
       <AuthProvider>
         <BrowserRouter>
-          <Box sx={{ minHeight: "100vh", bgcolor: "#f5f7ff" }}>
+          <Box sx={{ minHeight: "100vh", bgcolor: "#1c3dd2" }}>
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />

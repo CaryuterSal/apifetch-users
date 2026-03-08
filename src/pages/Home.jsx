@@ -39,20 +39,6 @@ const Home = () => {
           </AppButton>
         )}
       </Box>
-
-      <Container maxWidth="md" sx={{ py: 8 }}>
-        <Grid container spacing={3}>
-          {features.map((f, i) => (
-            <Grid item xs={12} md={4} key={i}>
-              <Paper elevation={2} sx={{ p: 4, textAlign: "center", borderRadius: 3, height: "100%", transition: "transform .2s", "&:hover": { transform: "translateY(-4px)", boxShadow: 6 } }}>
-                {f.icon}
-                <Typography variant="h6" fontWeight={700} mt={2} mb={1}>{f.title}</Typography>
-                <Typography variant="body2" color="text.secondary">{f.desc}</Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
     </Box>
   );
 };
