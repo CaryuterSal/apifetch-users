@@ -42,15 +42,15 @@ const CreateUserModal = ({ open, onClose, onCreated }) => {
     setLoading(true);
     try {
       await createUser(form);
+      setForm(initialForm);
+      onCreated();
+      onClose();
       await Swal.fire({
         icon: "success",
         title: "¡Usuario creado!",
         text: "El usuario fue registrado correctamente.",
         confirmButtonColor: "#1a237e"
       });
-      setForm(initialForm);
-      onCreated();
-      onClose();
     } catch {
       await Swal.fire({
         icon: "error",
