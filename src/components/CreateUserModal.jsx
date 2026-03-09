@@ -12,10 +12,10 @@ import { createUser } from "../services/userService";
 import Swal from "sweetalert2";
 
 const initialForm = {
-  email: "", username: "", password: "",
-  firstname: "", lastname: "",
-  city: "", street: "", number: "", zipcode: "",
-  phone: "",
+  id: 0,
+  username: "",
+  email: "",
+  password: "",
 };
 
 const validate = (form) => {
@@ -23,9 +23,6 @@ const validate = (form) => {
   if (!form.email || !/\S+@\S+\.\S+/.test(form.email)) errs.email = "Email inválido";
   if (!form.username || form.username.length < 3) errs.username = "Mínimo 3 caracteres";
   if (!form.password || form.password.length < 4) errs.password = "Mínimo 4 caracteres";
-  if (!form.firstname) errs.firstname = "Requerido";
-  if (!form.lastname) errs.lastname = "Requerido";
-  if (!form.phone) errs.phone = "Requerido";
   return errs;
 };
 
@@ -44,13 +41,7 @@ const CreateUserModal = ({ open, onClose, onCreated }) => {
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
     try {
-      const payload = {
-        email: form.email, username: form.username, password: form.password,
-        name: { firstname: form.firstname, lastname: form.lastname },
-        address: { city: form.city, street: form.street, number: parseInt(form.number) || 0, zipcode: form.zipcode, geolocation: { lat: "0", long: "0" } },
-        phone: form.phone,
-      };
-      await createUser(payload);
+      await createUser(form);
       await Swal.fire({
         icon: "success",
         title: "¡Usuario creado!",
@@ -81,25 +72,10 @@ const CreateUserModal = ({ open, onClose, onCreated }) => {
       </DialogTitle>
       <DialogContent sx={{ pt: 3, pb: 1 }}>
         <Typography variant="subtitle2" color="text.secondary" mb={1}>Información de cuenta</Typography>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1 }}>
-          <Box sx={{ gridColumn: "1/-1" }}>{field("email", "Email", "email")}</Box>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {field("email", "Email", "email")}
           {field("username", "Usuario")}
           {field("password", "Contraseña", "password")}
-        </Box>
-        <Divider sx={{ my: 1.5 }} />
-        <Typography variant="subtitle2" color="text.secondary" mb={1}>Datos personales</Typography>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1 }}>
-          {field("firstname", "Nombre")}
-          {field("lastname", "Apellido")}
-          <Box sx={{ gridColumn: "1/-1" }}>{field("phone", "Teléfono")}</Box>
-        </Box>
-        <Divider sx={{ my: 1.5 }} />
-        <Typography variant="subtitle2" color="text.secondary" mb={1}>Dirección</Typography>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1 }}>
-          {field("city", "Ciudad")}
-          {field("zipcode", "CP")}
-          {field("street", "Calle")}
-          {field("number", "Número")}
         </Box>
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2, gap: 1 }}>
